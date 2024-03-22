@@ -1,9 +1,10 @@
 import React from 'react'
+import Login from './pages/Login'
 
 function App() {
   return (
-    <div className='bg-black'>
-      hihi
+    <div className=''>
+      <Login/>
     </div>
   )
 }
