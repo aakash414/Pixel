@@ -1,9 +1,11 @@
 import React from 'react'
+// import Chat from './components/Chat'
+import ChatPage from './pages/ChatPage'
 
 function App() {
   return (
-    <div className='bg-black'>
-      hihi
+    <div className=''>
+      <ChatPage/>
     </div>
   )
 }
