@@ -16,7 +16,8 @@ const OnrampSessionResource = Stripe.StripeResource.extend({
 const port = 3001
 app.use(cors());
 app.use(express.json());
-
+app.use(express.static("public"))
+   
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
@@ -46,26 +47,36 @@ app.post('/search', async (req, res) => {
   try {
     // Extract search parameters from request body
     console.log(req.body.searchParam, "searchParam")
-    const url = "http://localhost:3000/search";
-    const authToken = 'Signature keyId="bpp.dbs.digiit.io|164|ed25519",algorithm="ed25519",created="1655897034",expires="1655900634",headers="(created) (expires) digest",signature="ddTKLg7eq3EXZGqPJhrDlwoTku3sTt/c7K4iRnAna+dC9x+hmBM6z+YZRnCu3WRj3dfZDOoi57U4hOoPXP/SCA=="';
+    const url = "https://ps-bap-client.becknprotocol.io/search";
+    // const url = "http://localhost:3000/";
+    // const authToken = 'Signature keyId="bpp.dbs.digiit.io|164|ed25519",algorithm="ed25519",created="1655897034",expires="1655900634",headers="(created) (expires) digest",signature="ddTKLg7eq3EXZGqPJhrDlwoTku3sTt/c7K4iRnAna+dC9x+hmBM6z+YZRnCu3WRj3dfZDOoi57U4hOoPXP/SCA=="';
     
     const requestData = {
       "context": {
-        "country": "IND",
-        "domain": "mobility:publictransport:0.8.0",
+        "location": {
+          "country": {
+              "code": "IND"
+          },
+          "city": {
+              "code": "std:080"
+          }
+        },
+        "domain": "local-retail",
         "timestamp": "2023-03-23T04:41:16Z",
-        "bap_id": "beckn-sandbox-bap.becknprotocol.io",
-        "transaction_id": "7afe44fd-d947-4a0a-81bc-d286784df2c1",
+        "bap_id": "ps-bap-network.becknprotocol.io",
+        "transaction_id": "8100d125-76a7-4588-88be-81b97657cd09",
         "city": "std:080",
-        "core_version": "0.9.4",
+        "version": "1.1.0",
         "action": "search",
-        "bap_uri": "https://sandbox-bap-network.becknprotocol.io"
+        "bap_uri": "https://ps-bap-network.becknprotocol.io/",
+        "bpp_id": "beckn-sandbox-bpp.becknprotocol.io",
+        "bpp_url": "https://sandbox-bpp-network.becknprotocol.io",
       },
       "message": {
         "intent": {
           "item": {
             "descriptor": {
-                "name": req.body.searchParam
+                "name": "coffee"
             }
         },
         "fulfillment": {
@@ -79,15 +90,12 @@ app.post('/search', async (req, res) => {
       }
     };
 
-    const response = await axios.post(url, requestData, {
-      headers: {
-        'Authorization': authToken,
-      }
-    });
+    const response = await axios.post(url, requestData);
 
-    // console.log((response.data), "response");
+    console.log((response.data), "response");
 
     res.send((response.data));
+    // clg
   } catch (error) {
     // Handle errors
     console.error('Error searching in ONDC:', error);

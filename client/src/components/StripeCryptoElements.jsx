@@ -1,17 +1,13 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 // ReactContext to simplify access of StripeOnramp object
-const CryptoElementsContext =
-  React.createContext(null);
-CryptoElementsContext.displayName = 'CryptoElementsContext';
+const CryptoElementsContext = React.createContext(null);
 
 export const CryptoElements = ({
   stripeOnramp,
   children,
 }) => {
-  const [ctx, setContext] = React.useState(() => ({
-    onramp: null,
-  }));
+  const [ctx, setContext] = React.useState(() => ({ onramp: null }));
 
   React.useEffect(() => {
     let isMounted = true;
@@ -41,57 +37,29 @@ export const useStripeOnramp = () => {
 };
 
 // React element to render Onramp UI
-const useOnrampSessionListener = (
-  type,
-  session,
-  callback
-) => {
-  React.useEffect(() => {
-    if (session && callback) {
-      const listener = (e) => callback(e.payload);
-      session.addEventListener(type, listener);
-      return () => {
-        session.removeEventListener(type, listener);
-      };
-    }
-    return () => {};
-  }, [session, callback, type]);
-};
-
 export const OnrampElement = ({
   clientSecret,
   appearance,
-  onReady,
-  onChange,
   ...props
 }) => {
   const stripeOnramp = useStripeOnramp();
   const onrampElementRef = React.useRef(null);
-  const [session, setSession] = React.useState();
 
-  const appearanceJSON = JSON.stringify(appearance);
   React.useEffect(() => {
     const containerRef = onrampElementRef.current;
     if (containerRef) {
-      // NB: ideally we want to be able to hot swap/update onramp iframe
-      // This currently results a flash if one needs to mint a new session when they need to udpate fixed transaction details
       containerRef.innerHTML = '';
 
       if (clientSecret && stripeOnramp) {
-        setSession(
-          stripeOnramp
-            .createSession({
-              clientSecret,
-              appearance: appearanceJSON ? JSON.parse(appearanceJSON) : {}
-            })
-            .mount(containerRef)
-        );
+        stripeOnramp
+          .createSession({
+            clientSecret,
+            appearance,
+          })
+          .mount(containerRef)
       }
     }
-  }, [appearanceJSON, clientSecret, stripeOnramp]);
-
-  useOnrampSessionListener('onramp_ui_loaded', session, onReady);
-  useOnrampSessionListener('onramp_session_updated', session, onChange);
+  }, [clientSecret, stripeOnramp]);
 
   return <div {...props} ref={onrampElementRef}></div>;
 };
