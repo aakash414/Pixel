@@ -6,9 +6,47 @@ import Clothes from "../assets/clothes.jpg";
 import Rice from "../assets/rice.jpg";
 import Stationary from "../assets/stationary.jpg";
 import Wheat from "../assets/wheatsack.jpg";
+import React, { useState } from 'react';
+import Card from '../components/Card';
+import search from '../assets/search.svg';
+import Books from '../assets/Books.jpg';
+import Clothes from '../assets/clothes.jpg';
+import Rice from '../assets/rice.jpg';
+import Stationary from '../assets/stationary.jpg';
+import Wheat from '../assets/wheatsack.jpg';
+import { useContractWrite, useContract } from "@thirdweb-dev/react";
+import { poolAddress } from '../../const';
+
 
 const Displaycards = () => {
-  const cardsData = [
+const { contract } = useContract(poolAddress);
+const { mutate: createPool, isLoading: creatingPool } = useContractWrite(
+  contract, // Pass the contract object here
+  "createPool" // Name of the function in the smart contract
+);
+
+const { mutate: contributeToPool, isLoading: contributingToPool } = useContractWrite(
+  contract, // Pass the contract object here
+  "contributeToPool" // Name of the function in the smart contract
+);
+
+const handleCreateAndContributeToPool = async (contributionTarget, contributionAmount) => {
+  try {
+    // Create a new pool
+    await createPool(contributionTarget);
+    // Contribute to the newly created pool
+    await contributeToPool(poolId, contributionAmount);
+    // Handle success
+    console.log("Pool created and contribution successful");
+  } catch (error) {
+    // Handle error
+    console.error("Error creating and contributing to pool:", error);
+  }
+};
+
+  const [contributionTarget, setContributionTarget] = useState('');
+  const [contributionAmount, setContributionAmount] = useState('');
+  const cardsData = [ 
     {
       id: 1,
       image: Books,

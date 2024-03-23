@@ -3,7 +3,6 @@ import ChatPage from "./pages/ChatPage";
 import Landing from "./pages/Landing";
 import Displaycards from "./pages/Displaycards";
 import Header from "./components/Header";
-import Orders from "./pages/Orders";
 
 function App() {
   return (
@@ -18,6 +17,7 @@ function App() {
           <Route path="/pools" element={<Displaycards />} />
           <Route path="/my-order" element={<Orders />} />
           {/* Route for Displaycards page */}
+          {/* <Route path="/sellproducts" element={<SellPoduct />} /> */}
         </Routes>
       </div>
     </Router>
