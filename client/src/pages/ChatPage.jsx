@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import userspic from "../assets/userspic.svg";
 import { app, db } from "../firebase/Firebase";
 import {
   collection,
@@ -11,8 +12,8 @@ import {
 
 function Sidebar({ activeUser, setActiveUser }) {
   return (
-    <div className="w-1/4 bg-white border-r border-gray-300">
-      <header className="p-4 border-b border-gray-300 flex justify-between items-center bg-indigo-600 text-white">
+    <div className="w-1/4 bg-gray-50 border-r border-gray-300">
+      <header className="p-4 border-b border-gray-300 flex justify-between items-center bg-primary text-white">
         <h1 className="text-2xl font-semibold">Chat Web</h1>
         {/* <MenuDropdown /> */}
       </header>
@@ -47,7 +48,9 @@ function ContactList({ setActiveUser }) {
           className={`flex items-center mb-4 cursor-pointer p-2 rounded-md `}
           onClick={() => handleUserClick(room)}
         >
-          <div className="w-12 h-12 bg-gray-300 rounded-full mr-3"></div>
+          <div className="w-12 h-12 bg-gray-300 rounded-full mr-3 flex items-center justify-center">
+          <img src={userspic} alt="userspic" className="h-12 w-12 text-gray-600" />
+          </div>
           <div className="flex-1">
             <h2 className="text-lg font-semibold">{room}</h2>
           </div>
@@ -116,7 +119,7 @@ function ChatArea({ activeUser }) {
       <header className="bg-white p-4 text-gray-700">
         <h1 className="text-2xl font-semibold">{activeUser}</h1>
       </header>
-      <div className="h-screen overflow-y-auto p-4 pb-36">
+      <div className="h-screen overflow-y-auto p-4 pb-36 bg-white">
         {!messages ? (
           <p className="text-center">No messages yet...</p>
         ) : (
@@ -130,13 +133,13 @@ function ChatArea({ activeUser }) {
           <input
             type="text"
             placeholder="Type a message..."
-            className="w-full p-2 rounded-md border border-gray-400 focus:outline-none focus:border-blue-500"
+            className="w-full p-2 rounded-xl border border-gray-400 focus:outline-none focus:border-primary"
             onKeyPress={handleKeyPress}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />
           <button
-            className="bg-indigo-500 text-white px-4 py-2 rounded-md ml-2"
+            className="bg-primary text-white px-4 py-2 rounded-xl ml-2"
             onClick={handleSendMessage}
           >
             Send
