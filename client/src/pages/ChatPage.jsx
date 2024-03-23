@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import {app,db} from '../firebase/Firebase'
-import { collection, query, getDocs ,setDoc,doc, addDoc} from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { app, db } from "../firebase/Firebase";
+import {
+  collection,
+  query,
+  getDocs,
+  setDoc,
+  doc,
+  addDoc,
+} from "firebase/firestore";
 
-
-function Sidebar({activeUser,setActiveUser}) {
+function Sidebar({ activeUser, setActiveUser }) {
   return (
     <div className="w-1/4 bg-white border-r border-gray-300">
       <header className="p-4 border-b border-gray-300 flex justify-between items-center bg-indigo-600 text-white">
         <h1 className="text-2xl font-semibold">Chat Web</h1>
         {/* <MenuDropdown /> */}
       </header>
-      <ContactList setActiveUser={setActiveUser}/>
+      <ContactList setActiveUser={setActiveUser} />
     </div>
   );
 }
@@ -22,7 +28,7 @@ function ContactList({ setActiveUser }) {
     async function fetchDocumentData() {
       const q = query(collection(db, "chat"));
       const querySnapshot = await getDocs(q);
-      const rooms = querySnapshot.docs.map(doc => doc.data().roomName);
+      const rooms = querySnapshot.docs.map((doc) => doc.data().roomName);
       setRoomNames(rooms);
     }
 
@@ -36,7 +42,11 @@ function ContactList({ setActiveUser }) {
   return (
     <div className="overflow-y-auto h-screen p-3 mb-9 pb-20">
       {roomNames.map((room, index) => (
-        <div key={index} className={`flex items-center mb-4 cursor-pointer p-2 rounded-md `} onClick={() => handleUserClick(room)}>
+        <div
+          key={index}
+          className={`flex items-center mb-4 cursor-pointer p-2 rounded-md `}
+          onClick={() => handleUserClick(room)}
+        >
           <div className="w-12 h-12 bg-gray-300 rounded-full mr-3"></div>
           <div className="flex-1">
             <h2 className="text-lg font-semibold">{room}</h2>
@@ -47,30 +57,31 @@ function ContactList({ setActiveUser }) {
   );
 }
 
-function ChatArea({activeUser}) {
+function ChatArea({ activeUser }) {
   const [messages, setMessages] = useState(null);
-  const [inputValue, setInputValue] = useState('');
-  let blah = true
+  const [inputValue, setInputValue] = useState("");
+  let blah = true;
   const handleSendMessage = async () => {
-    if (inputValue.trim() !== '') {
+    if (inputValue.trim() !== "") {
       // Create a new message object with user ID (replace "123" with actual user ID)
-      const walletid = localStorage.getItem("address")
+      const walletid = localStorage.getItem("walletAddress");
+      console.log("walletAddress", walletid);
       const message = {
         message: inputValue,
         user: walletid,
         time: new Date().toLocaleTimeString(),
       };
-  
+
       console.log(message, "messages"); // For debugging
-  
+
       try {
         // Add the message to Firestore using collection reference
-        console.log(activeUser,"activeusre")
+        console.log(activeUser, "activeusre");
         const messageRef = collection(db, "chat", activeUser, "messages");
         await addDoc(messageRef, message);
-        blah=false
+        blah = false;
         // Clear the input field
-        setInputValue('');
+        setInputValue("");
       } catch (error) {
         console.error("Error adding message:", error);
         // Handle the error appropriately, e.g., display an error message to the user
@@ -86,16 +97,16 @@ function ChatArea({activeUser}) {
     }
 
     fetchMessages();
-    console.log(messages,"messages")
+    console.log(messages, "messages");
 
     // Cleanup function to unsubscribe from real-time updates (optional)
     return () => {
       // Unsubscribe from any real-time listeners here
     };
-  }, [activeUser,blah]);
+  }, [activeUser, blah]);
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleSendMessage();
     }
   };
@@ -123,7 +134,6 @@ function ChatArea({activeUser}) {
             onKeyPress={handleKeyPress}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-
           />
           <button
             className="bg-indigo-500 text-white px-4 py-2 rounded-md ml-2"
@@ -139,10 +149,22 @@ function ChatArea({activeUser}) {
 
 function Message({ message }) {
   return (
-    <div className={message.isUser ? "flex justify-end mb-4 cursor-pointer" : "flex mb-4 cursor-pointer"}>
-      <div className={message.isUser ? "flex max-w-96 bg-indigo-500  text-white rounded-lg p-3 gap-3" : "bg-blue-300 px-4 py-2 rounded-lg"}>
-        <p className=''>{message.message}</p>
-        <p className='text-indigo-600 text-xs'>{message.user}</p>
+    <div
+      className={
+        message.isUser
+          ? "flex justify-end mb-4 cursor-pointer"
+          : "flex mb-4 cursor-pointer"
+      }
+    >
+      <div
+        className={
+          message.isUser
+            ? "flex max-w-96 bg-indigo-500  text-white rounded-lg p-3 gap-3"
+            : "bg-blue-300 px-4 py-2 rounded-lg"
+        }
+      >
+        <p className="">{message.message}</p>
+        <p className="text-indigo-600 text-xs">{message.user}</p>
       </div>
     </div>
   );
@@ -152,10 +174,10 @@ function Chat() {
   const [activeUser, setActiveUser] = useState(null);
   return (
     <div className="flex h-screen overflow-hidden">
-      <Sidebar activeUser={activeUser} setActiveUser={setActiveUser}/>
-      <ChatArea activeUser={activeUser}/>
+      <Sidebar activeUser={activeUser} setActiveUser={setActiveUser} />
+      <ChatArea activeUser={activeUser} />
     </div>
   );
 }
 
-export default Chat
+export default Chat;

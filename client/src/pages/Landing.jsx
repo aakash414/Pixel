@@ -23,15 +23,18 @@ function Home() {
   // Load wallet address from local storage on component mount
   useEffect(() => {
     const savedAddress = localStorage.getItem("walletAddress");
-    if (!savedAddress) {
-      // If there's a saved address, you can use it here as needed
-      localStorage.setItem("walletAddress", "123143q4324");
+    if (address) {
+      if (!savedAddress) {
+        console.log("wallet addres in use effect", address);
+        // If there's a saved address, you can use it here as needed
+        localStorage.setItem("walletAddress", address);
+      }
     }
-  }, []);
+  }, [address]);
 
   console.log(address, "walletInstance");
   return (
-    <main className="flex flex-col items-center justify-center w-full max-w-6xl px-4 mx-auto h-screen">
+    <main className="flex flex-col items-center justify-center w-full max-w-6xl px-4 mx-auto h-auto">
       {walletInstance ? (
         <>
           <ConnectWallet
@@ -40,7 +43,7 @@ function Home() {
               align: "center",
             }}
           />
-       <Displaycards/>
+          <Displaycards />
         </>
       ) : (
         <>
@@ -48,12 +51,19 @@ function Home() {
           <div className="flex flex-col items-center w-16 h-16 max-w-6xl px-4 mx-auto">
             <div className="flex flex-col items-center w-full max-w-6xl px-4 mx-auto">
               <div className="flex flex-col items-center justify-center mb-8">
-                <ConnectWallet
+                {/* <ConnectWallet
+                  btnTitle="Login"
                   dropdownPosition={{
                     side: "bottom",
                     align: "center",
                   }}
-                />
+                  theme={darkTheme({
+                    colors: {
+                      modalBg: "#9333ea",
+                      dropdownBg: "#fdfcfd",
+                    },
+                  })}
+                /> */}
                 {/* {address ? (
       <div className="p-8">
         <Web3Button
