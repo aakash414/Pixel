@@ -11,7 +11,7 @@ function App() {
     <div>
       <ThirdwebProvider
       activeChain="sepolia"
-      clientId="cdd8254e7fc70530f20b83272500e204"
+      clientId="client_id"
       // locale={en()}
       supportedWallets={[
         localWallet(),
