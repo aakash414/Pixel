@@ -12,12 +12,12 @@ import { activeChain, factoryAddress } from "../const.js";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThirdwebProvider
-      clientId={import.meta.env.REACT_APP_CLIENT_ID}
+      clientId={import.meta.env.VITE_APP_CLIENT_ID}
       activeChain="sepolia"
       supportedWallets={[
         smartWallet(embeddedWallet(), {
-          factoryAddress: factoryAddress,
           gasless: true,
+          factoryAddress: factoryAddress,
         }),
       ]}
     >

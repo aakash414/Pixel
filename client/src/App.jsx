@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import BrowserRouter, Routes, and Route
 import ChatPage from "./pages/ChatPage";
-import Login from "./pages/Login";
+import Landing from "./pages/Landing";
 import Displaycards from "./pages/Displaycards";
 import Header from "./components/Header";
 
@@ -12,7 +12,7 @@ function App() {
         <Header /> {/* Header component */}
         {/* Define routes for different pages */}
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Landing />} />
           <Route path="/chat" element={<ChatPage />} />{" "}
           {/* Route for ChatPage */}
           <Route path="/displaycards" element={<Displaycards />} />{" "}
