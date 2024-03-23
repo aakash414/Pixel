@@ -40,10 +40,30 @@ function MenuDropdown() {
 }
 
 function ContactList() {
+  const dummyUsers = [
+    { id: 1, name: "Alice" },
+    { id: 2, name: "Bob" },
+    { id: 3, name: "Charlie" },
+    { id: 4, name: "David" },
+    { id: 5, name: "Ella" },
+    { id: 6, name: "Fiona" },
+    { id: 7, name: "George" },
+    { id: 8, name: "Hannah" },
+    { id: 9, name: "Ian" },
+    { id: 10, name: "Jack" }
+  ];
+
   return (
-    <div className="overflow-y-auto h-screen p-3 mb-9 pb-20">
-      {/* Contact list items */}
-    </div>
+         <div className="overflow-y-auto h-screen p-3 mb-9 pb-20">
+        {dummyUsers.map(user => (
+          <div key={user.id} className={`flex items-center mb-4 cursor-pointer p-2 rounded-md `} onClick={() => handleUserClick(user)}>
+            <div className="w-12 h-12 bg-gray-300 rounded-full mr-3"></div>
+            <div className="flex-1">
+              <h2 className="text-lg font-semibold">{user.name}</h2>
+            </div>
+          </div>
+        ))}
+      </div>
   );
 }
 
@@ -54,7 +74,13 @@ function ChatArea() {
   const handleSendMessage = () => {
     if (inputValue.trim() !== '') {
       setMessages([...messages, { content: inputValue, isUser: true }]);
+      console.log(messages, "messages");
       setInputValue('');
+    }
+  };
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
     }
   };
 
@@ -74,8 +100,10 @@ function ChatArea() {
             type="text"
             placeholder="Type a message..."
             className="w-full p-2 rounded-md border border-gray-400 focus:outline-none focus:border-blue-500"
+            onKeyPress={handleKeyPress}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
+
           />
           <button
             className="bg-indigo-500 text-white px-4 py-2 rounded-md ml-2"
