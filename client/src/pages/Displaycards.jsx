@@ -1,19 +1,12 @@
-import React from "react";
 import Card from "../components/Card";
 import search from "../assets/search.svg";
-import Books from "../assets/Books.jpg";
-import Clothes from "../assets/clothes.jpg";
 import Rice from "../assets/rice.jpg";
 import Stationary from "../assets/stationary.jpg";
 import Wheat from "../assets/wheatsack.jpg";
 import React, { useState } from 'react';
-import Card from '../components/Card';
-import search from '../assets/search.svg';
 import Books from '../assets/Books.jpg';
+import Orders from "./Orders";
 import Clothes from '../assets/clothes.jpg';
-import Rice from '../assets/rice.jpg';
-import Stationary from '../assets/stationary.jpg';
-import Wheat from '../assets/wheatsack.jpg';
 import { useContractWrite, useContract } from "@thirdweb-dev/react";
 import { poolAddress } from '../../const';
 

@@ -3,6 +3,7 @@ import ChatPage from "./pages/ChatPage";
 import Landing from "./pages/Landing";
 import Displaycards from "./pages/Displaycards";
 import Header from "./components/Header";
+import Orders from "./pages/Orders";
 
 function App() {
   return (
