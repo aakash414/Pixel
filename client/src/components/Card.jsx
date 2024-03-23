@@ -39,8 +39,8 @@ const Card = ({ image, category, amount }) => {
         
         <div className="flex justify-between items-center mb-2">
           <div className="block">
-            <h3 className="font-epilogue font-semibold text-[16px] text-white text-left leading-[26px] truncate">Total Amount:</h3>
-            <p className="mt-[5px] font-epilogue font-normal font-[12px] text-[#808191] text-left leading-[18px] truncate">{amount}</p>
+            <h3 className="font-epilogue font-semibold text-[16px] text-white text-left leading-[26px] truncate">{category}</h3>
+            <p className="mt-[5px] font-epilogue  font-[12px] text-[#808191] text-left leading-[18px] truncate">{amount}</p>
           </div>
           <button className="bg-primary hover:bg-primary text-white font-bold py-2 px-3 rounded-xl">
             Submit
