@@ -7,7 +7,6 @@ import Displaycards from './pages/Displaycards'
 function App() {
   return (
     <div className=''>
-      <ChatPage/>
       <Login/>
       <Displaycards/>
 
