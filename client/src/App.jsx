@@ -4,6 +4,7 @@ import Landing from "./pages/Landing";
 import Displaycards from "./pages/Displaycards";
 import Header from "./components/Header";
 import Orders from "./pages/Orders";
+import StripePage from "./pages/StripePage";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
           {/* Route for ChatPage */}
           <Route path="/pools" element={<Displaycards />} />
           <Route path="/my-order" element={<Orders />} />
+          <Route path="/profile" element={<Displaycards />} />
+          <Route path="/stripe" element={<StripePage/>} />
           {/* Route for Displaycards page */}
         </Routes>
       </div>
