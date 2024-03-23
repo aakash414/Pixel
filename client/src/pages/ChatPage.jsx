@@ -50,7 +50,7 @@ function ContactList({ setActiveUser }) {
 function ChatArea({activeUser}) {
   const [messages, setMessages] = useState(null);
   const [inputValue, setInputValue] = useState('');
-
+  let blah = true
   const handleSendMessage = async () => {
     if (inputValue.trim() !== '') {
       // Create a new message object with user ID (replace "123" with actual user ID)
@@ -68,7 +68,7 @@ function ChatArea({activeUser}) {
         console.log(activeUser,"activeusre")
         const messageRef = collection(db, "chat", activeUser, "messages");
         await addDoc(messageRef, message);
-  
+        blah=false
         // Clear the input field
         setInputValue('');
       } catch (error) {
@@ -92,7 +92,7 @@ function ChatArea({activeUser}) {
     return () => {
       // Unsubscribe from any real-time listeners here
     };
-  }, [activeUser,messages]);
+  }, [activeUser,blah]);
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
