@@ -1,106 +1,72 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import {
+  ConnectWallet,
+  Web3Button,
+  useOwnedNFTs,
+  useAddress,
+  useContract,
+  ThirdwebNftMedia,
+  useClaimNFT,
+} from "@thirdweb-dev/react";
+import { editionDropAddress } from "../../const";
 
-function Login() {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      console.log(formData,"formData")
-      const response = await axios.post('http://localhost:3000/login', {
-        email: formData.email,
-        password: formData.password
-      })
-      console.log('Login Successful', response.data);
-      // Handle successful login, redirect user, etc.
-    } catch (error) {
-      console.error('Login Failed', error);
-      // Handle login failure, show error message, etc.
-    }
-  };
+function Home() {
+  const address = useAddress();
+  const { contract } = useContract(editionDropAddress);
+  const { data, isLoading } = useOwnedNFTs(contract, address);
+  const { mutateAsync: claim, isLoading: isClaiming } = useClaimNFT(contract);
 
   return (
-    <>
-      <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign in to your account
-          </h2>
-        </div>
+    <main className="flex flex-col items-center w-full max-w-6xl px-4 mx-auto">
+      <div className="flex flex-col items-center w-full max-w-6xl px-4 mx-auto">
+        <div className="flex flex-col items-center w-full max-w-6xl px-4 mx-auto">
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-          <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                  Email address
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
+          <div className="flex flex-col items-center justify-center mb-8">
+            <ConnectWallet
+              dropdownPosition={{
+                side: "bottom",
+                align: "center",
+              }}
+            />
+
+            {address ? (
+              <div className="p-8">
+                <Web3Button
+                  contractAddress={editionDropAddress}
+                  action={() =>
+                    claim({
+                      tokenId: 0,
+                      quantity: 1,
+                    })
+                  }
+                >
+                  Claim Edition NFT
+                </Web3Button>
+              </div>
+            ) : (
+              <p>Please log in with your Google account or email</p>
+            )}
+            {address && isLoading ? <p>Loading Owned NFTs...</p> : null}
+            {address && !isLoading && data && data.length === 0 ? (
+              <p>
+                {isClaiming
+                  ? "Deploying your account and claiming..."
+                  : "No NFTs, claim one now!"}
+              </p>
+            ) : null}
+            {data &&
+              data?.map((nft) => (
+                <div className="flex flex-col items-center w-full max-w-6xl px-4 mx-auto" key={nft.metadata.id}>
+                  <ThirdwebNftMedia metadata={nft.metadata} />
+                  <p>
+                    You own {nft.quantityOwned} {nft.metadata.name}
+                  </p>
                 </div>
-              </div>
-
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                  Password
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    value={formData.password}
-                    onChange={handleChange}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="text-sm leading-6">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a>
-                </div>
-              </div>
-
-              <div>
-                <input
-                  type="submit"
-                  value="Sign in"
-                  className="flex cursor-pointer w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  />
-              </div>
-            </form>
+              ))}
           </div>
         </div>
       </div>
-    </>
+    </main>
   );
 }
 
-export default Login;
+export default Home;
