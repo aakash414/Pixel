@@ -1,11 +1,12 @@
 const express = require('express')
 const ondc = require("ondc-node");
 const app = express()
+require('dotenv').config()
 const cors = require('cors');
 require("json-circular-stringify");
 const axios = require('axios')
 const Stripe = require("stripe");
-const stripe = Stripe('sk_test_tR3PYbcVNZZ796tH88S4VQ2u');
+const stripe = Stripe(process.env.STRIPE_KEY);
 const OnrampSessionResource = Stripe.StripeResource.extend({
   create: Stripe.StripeResource.method({
     method: 'POST',
