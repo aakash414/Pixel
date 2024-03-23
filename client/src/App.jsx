@@ -6,6 +6,9 @@ import Header from "./components/Header";
 import Orders from "./pages/Orders";
 import StripePage from "./pages/StripePage";
 import Profile from "./pages/Profile";
+import SellPoduct from "./pages/SellProduct";
+import ProductDetails from "./pages/ProductDetails";
+
 
 function App() {
   return (
@@ -23,7 +26,8 @@ function App() {
           <Route path="/stripe" element={<StripePage />} />
           <Route path="/profile" element={<Profile />} />{" "}
           {/* Route for Displaycards page */}
-          {/* <Route path="/sellproducts" element={<SellPoduct />} /> */}
+          <Route path="/sellproducts" element={<SellPoduct />} />
+          <Route path="/productdetails" element={<ProductDetails />} />
         </Routes>
       </div>
     </Router>

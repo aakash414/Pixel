@@ -8,6 +8,8 @@ import {
   embeddedWallet,
 } from "@thirdweb-dev/react";
 import { activeChain, factoryAddress } from "../const.js";
+import { StateContextProvider } from "../web3_client/web3_logic.jsx";
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -21,7 +23,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         }),
       ]}
     >
+      <StateContextProvider>
       <App />
+      </StateContextProvider>
     </ThirdwebProvider>
   </React.StrictMode>
 );
