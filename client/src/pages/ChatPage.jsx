@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import {app,db} from '../firebase/Firebase'
 
-function Sidebar() {
+
+function Sidebar({activeUser,setActiveUser}) {
   return (
     <div className="w-1/4 bg-white border-r border-gray-300">
       <header className="p-4 border-b border-gray-300 flex justify-between items-center bg-indigo-600 text-white">
         <h1 className="text-2xl font-semibold">Chat Web</h1>
         <MenuDropdown />
       </header>
-      <ContactList />
+      <ContactList setActiveUser={setActiveUser}/>
     </div>
   );
 }
@@ -39,7 +41,7 @@ function MenuDropdown() {
   );
 }
 
-function ContactList() {
+function ContactList({setActiveUser}) {
   const dummyUsers = [
     { id: 1, name: "Alice" },
     { id: 2, name: "Bob" },
@@ -52,6 +54,10 @@ function ContactList() {
     { id: 9, name: "Ian" },
     { id: 10, name: "Jack" }
   ];
+
+  function handleUserClick(user) {
+    setActiveUser(user);
+  }
 
   return (
          <div className="overflow-y-auto h-screen p-3 mb-9 pb-20">
@@ -67,7 +73,7 @@ function ContactList() {
   );
 }
 
-function ChatArea() {
+function ChatArea({activeUser}) {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
@@ -87,7 +93,7 @@ function ChatArea() {
   return (
     <div className="flex-1">
       <header className="bg-white p-4 text-gray-700">
-        <h1 className="text-2xl font-semibold">Alice</h1>
+        <h1 className="text-2xl font-semibold">{activeUser?.name}</h1>
       </header>
       <div className="h-screen overflow-y-auto p-4 pb-36">
         {messages.map((message, index) => (
@@ -133,10 +139,11 @@ function Message({ message }) {
 }
 
 function Chat() {
+  const [activeUser, setActiveUser] = useState(null);
   return (
     <div className="flex h-screen overflow-hidden">
-      <Sidebar />
-      <ChatArea />
+      <Sidebar activeUser={activeUser} setActiveUser={setActiveUser}/>
+      <ChatArea activeUser={activeUser}/>
     </div>
   );
 }
