@@ -33,7 +33,7 @@ function Home() {
 
   console.log(address, "walletInstance");
   return (
-    <main className="flex flex-col items-center justify-center w-full max-w-6xl px-4 mx-auto h-auto">
+    <main className="flex flex-col items-center justify-center w-full max-w-6xl px-4 mx-auto h-screen">
       {walletInstance ? (
         <>
           <ConnectWallet
