@@ -22,24 +22,21 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.post("/create-onramp-session", async (req, res) => {
-  const { transaction_details } = req.body;
-  console.log(transaction_details,"transaction_details")
-
-  // Create an OnrampSession with the order amount and currency
-  const onrampSession = await new OnrampSessionResource(stripe).create({
-    transaction_details: {
-      destination_currency: transaction_details["destination_currency"],
-      destination_exchange_amount: transaction_details["destination_exchange_amount"],
-      destination_network: transaction_details["destination_network"],
-    },
-    customer_ip_address: req.socket.remoteAddress,
+app.post('/create-checkout-session', async (req, res) => {
+  const session = await stripe.checkout.sessions.create({
+    line_items: [
+      {
+        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+        price: '{{PRICE_ID}}',
+        quantity: 1,
+      },
+    ],
+    mode: 'payment',
+    success_url: `${YOUR_DOMAIN}?success=true`,
+    cancel_url: `${YOUR_DOMAIN}?canceled=true`,
   });
-  console.log(onrampSession,"onrampSession")
 
-  res.send({
-    clientSecret: onrampSession.client_secret,
-  });
+  res.redirect(303, session.url);
 });
 
 
@@ -47,9 +44,9 @@ app.post('/search', async (req, res) => {
   try {
     // Extract search parameters from request body
     console.log(req.body.searchParam, "searchParam")
-    const url = "https://ps-bap-client.becknprotocol.io/search";
+    const url = "http://localhost:3000/search";
     // const url = "http://localhost:3000/";
-    // const authToken = 'Signature keyId="bpp.dbs.digiit.io|164|ed25519",algorithm="ed25519",created="1655897034",expires="1655900634",headers="(created) (expires) digest",signature="ddTKLg7eq3EXZGqPJhrDlwoTku3sTt/c7K4iRnAna+dC9x+hmBM6z+YZRnCu3WRj3dfZDOoi57U4hOoPXP/SCA=="';
+    const authToken = 'Signature keyId="bpp.dbs.digiit.io|164|ed25519",algorithm="ed25519",created="1655897034",expires="1655900634",headers="(created) (expires) digest",signature="ddTKLg7eq3EXZGqPJhrDlwoTku3sTt/c7K4iRnAna+dC9x+hmBM6z+YZRnCu3WRj3dfZDOoi57U4hOoPXP/SCA=="';
     
     const requestData = {
       "context": {
@@ -61,7 +58,7 @@ app.post('/search', async (req, res) => {
               "code": "std:080"
           }
         },
-        "domain": "local-retail",
+        "domain": "mobility:ridehailing:0.8.0",
         "timestamp": "2023-03-23T04:41:16Z",
         "bap_id": "ps-bap-network.becknprotocol.io",
         "transaction_id": "8100d125-76a7-4588-88be-81b97657cd09",
@@ -74,27 +71,33 @@ app.post('/search', async (req, res) => {
       },
       "message": {
         "intent": {
-          "item": {
-            "descriptor": {
-                "name": "coffee"
+            "fulfillment": {
+                "start": {
+                    "location": {
+                        "gps": "12.903561,77.5939631"
+                    }
+                },
+                "end": {
+                    "location": {
+                        "gps": "12.903561,77.5939631"
+                    }
+                }
             }
-        },
-        "fulfillment": {
-          "end": {
-              "location": {
-                  "gps": "12.4535445,77.9283792"
-              }
-          }
-      }
         }
-      }
+    }
     };
 
     const response = await axios.post(url, requestData);
 
-    console.log((response.data), "response");
+    // console.log((response.data), "response");
+    const dummyResponse =  {
+      id: 4,
+      image: "",
+      amount: 12000,
+      category: req.body.searchParam,
+    }
 
-    res.send((response.data));
+    res.send((dummyResponse));
     // clg
   } catch (error) {
     // Handle errors
