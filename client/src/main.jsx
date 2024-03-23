@@ -1,16 +1,15 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
 import {
   ThirdwebProvider,
   smartWallet,
   embeddedWallet,
 } from "@thirdweb-dev/react";
-import { activeChain, factoryAddress } from '../const.js';
+import { activeChain, factoryAddress } from "../const.js";
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThirdwebProvider
       clientId={import.meta.env.REACT_APP_CLIENT_ID}
@@ -24,5 +23,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     >
       <App />
     </ThirdwebProvider>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);

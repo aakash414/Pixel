@@ -16,17 +16,16 @@ function Home() {
   const { mutateAsync: claim, isLoading: isClaiming } = useClaimNFT(contract);
 
   return (
-    <main className="flex flex-col items-center w-full max-w-6xl px-4 mx-auto">
-      <div className="flex flex-col items-center w-full max-w-6xl px-4 mx-auto">
+    <main className="flex flex-col items-center justify-center w-full max-w-6xl px-4 mx-auto h-screen">
+      <div className="flex flex-col items-center w-16 h-16 max-w-6xl px-4 mx-auto">
         <div className="flex flex-col items-center w-full max-w-6xl px-4 mx-auto">
-
           <div className="flex flex-col items-center justify-center mb-8">
-            <ConnectWallet
+            {/* <ConnectWallet
               dropdownPosition={{
                 side: "bottom",
                 align: "center",
               }}
-            />
+            /> */}
 
             {address ? (
               <div className="p-8">
@@ -43,7 +42,7 @@ function Home() {
                 </Web3Button>
               </div>
             ) : (
-              <p>Please log in with your Google account or email</p>
+              <p></p>
             )}
             {address && isLoading ? <p>Loading Owned NFTs...</p> : null}
             {address && !isLoading && data && data.length === 0 ? (
@@ -55,7 +54,10 @@ function Home() {
             ) : null}
             {data &&
               data?.map((nft) => (
-                <div className="flex flex-col items-center w-full max-w-6xl px-4 mx-auto" key={nft.metadata.id}>
+                <div
+                  className="flex flex-col items-center w-full max-w-6xl px-4 mx-auto"
+                  key={nft.metadata.id}
+                >
                   <ThirdwebNftMedia metadata={nft.metadata} />
                   <p>
                     You own {nft.quantityOwned} {nft.metadata.name}

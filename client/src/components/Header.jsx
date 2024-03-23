@@ -1,69 +1,109 @@
-import React from 'react'
-
-function Header() {
+const Header = () => {
   return (
-    <div>
-      <header class="bg-gray-900">
-  <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-    <div class="flex lg:flex-1">
-      <a href="#" class="-m-1.5 p-1.5">
-        <span class="sr-only">Your Company</span>
-        <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt=""/>
-      </a>
-    </div>
-    <div class="flex lg:hidden">
-      <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400">
-        <span class="sr-only">Open main menu</span>
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
-      </button>
-    </div>
-    <div class="hidden lg:flex lg:gap-x-12">
-      <a href="#" class="text-sm font-semibold leading-6 text-white">Product</a>
-      <a href="#" class="text-sm font-semibold leading-6 text-white">Features</a>
-      <a href="#" class="text-sm font-semibold leading-6 text-white">Marketplace</a>
-      <a href="#" class="text-sm font-semibold leading-6 text-white">Company</a>
-    </div>
-    <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-      <a href="#" class="text-sm font-semibold leading-6 text-white">Log in <span aria-hidden="true">&rarr;</span></a>
-    </div>
-  </nav>
-  {/* <!-- Mobile menu, show/hide based on menu open state. --> */}
-  <div class="lg:hidden" role="dialog" aria-modal="true">
-    {/* <!-- Background backdrop, show/hide based on slide-over state. --> */}
-    <div class="fixed inset-0 z-10"></div>
-    <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10">
-      <div class="flex items-center justify-between">
-        <a href="#" class="-m-1.5 p-1.5">
-          <span class="sr-only">Your Company</span>
-          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt=""/>
+    <div className="flex flex-wrap items-center justify-between py-2 w-full gap-6 md:py-4 md:gap-0 relative px-12">
+      <input
+        aria-hidden="true"
+        type="checkbox"
+        name="toggle_nav"
+        id="toggle_nav"
+        className="hidden peer"
+      />
+      <div className="relative z-20 w-full flex justify-between lg:w-max md:px-0">
+        <a
+          href="#home"
+          aria-label="logo"
+          className="flex space-x-2 items-center"
+        >
+          <div aria-hidden="true" className="flex space-x-1">
+            <div className="h-4 w-4 rounded-full bg-gray-900 dark:bg-white"></div>
+            <div className="h-6 w-2 bg-primary"></div>
+          </div>
+          <span className="text-2xl font-bold text-gray-900 dark:text-white">
+            Pixel
+          </span>
         </a>
-        <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-400">
-          <span class="sr-only">Close menu</span>
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+
+        <div className="relative flex items-center lg:hidden max-h-10">
+          <label
+            role="button"
+            htmlFor="toggle_nav"
+            aria-label="humburger"
+            id="hamburger"
+            className="relative  p-6 -mr-6"
+          >
+            <div
+              aria-hidden="true"
+              id="line"
+              className="m-auto h-0.5 w-5 rounded bg-sky-900 dark:bg-gray-300 transition duration-300"
+            ></div>
+            <div
+              aria-hidden="true"
+              id="line2"
+              className="m-auto mt-2 h-0.5 w-5 rounded bg-sky-900 dark:bg-gray-300 transition duration-300"
+            ></div>
+          </label>
+        </div>
       </div>
-      <div class="mt-6 flow-root">
-        <div class="-my-6 divide-y divide-gray-500/25">
-          <div class="space-y-2 py-6">
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800">Product</a>
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800">Features</a>
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800">Marketplace</a>
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800">Company</a>
-          </div>
-          <div class="py-6">
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800">Log in</a>
-          </div>
+      <div
+        aria-hidden="true"
+        className="fixed z-10 inset-0 h-screen w-screen bg-white/70 backdrop-blur-2xl origin-bottom scale-y-0 transition duration-500 peer-checked:origin-top peer-checked:scale-y-100 lg:hidden dark:bg-gray-900/70"
+      ></div>
+      <div
+        className=" flex-col z-20 flex-wrap gap-6 p-8 rounded-3xl border border-gray-100 bg-white shadow-2xl shadow-gray-600/10 justify-end  invisible opacity-0 translate-y-1  absolute top-full left-0 transition-all duration-300 scale-95 origin-top 
+                lg:relative lg:scale-100 lg:peer-checked:translate-y-0 lg:translate-y-0 lg:flex lg:flex-row lg:items-center lg:gap-0 lg:p-0 lg:bg-transparent  lg:visible lg:opacity-100 lg:border-none
+                peer-checked:scale-100 peer-checked:opacity-100 peer-checked:visible lg:shadow-none 
+                dark:shadow-none dark:bg-gray-800 dark:border-gray-700 w-fit"
+      >
+        <div className="text-gray-600 dark:text-gray-300 lg:pr-4 lg:w-auto w-full lg:pt-0">
+          <ul className="tracking-wide font-medium lg:text-sm flex-col flex lg:flex-row gap-6 lg:gap-0">
+            <li>
+              <a
+                href="#features"
+                className="block md:px-4 transition hover:text-primary"
+              >
+                <span>Chat Room</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#solution"
+                className="block md:px-4 transition hover:text-primary"
+              >
+                <span>My Orders</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#testimonials"
+                className="block md:px-4 transition hover:text-primary"
+              >
+                <span>Pools</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#blog"
+                className="block md:px-4 transition hover:text-primary"
+              >
+                <span>Profile</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div className="mt-12 lg:mt-0">
+          <a
+            href="#"
+            className="relative flex h-9 w-full items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
+          >
+            <span className="relative text-sm font-semibold text-white">
+              Connect
+            </span>
+          </a>
         </div>
       </div>
     </div>
-  </div>
-</header>
-    </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
