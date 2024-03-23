@@ -1,4 +1,4 @@
-import React from "react";
+import { ConnectWallet } from "@thirdweb-dev/react";
 
 const Hero = () => {
   return (
@@ -32,6 +32,7 @@ const Hero = () => {
                 Get started
               </span>
             </a>
+            <ConnectWallet className="relative flex h-4 w-full items-center justify-center px-6 sm:w-max bg-primary" />
             <a
               href="#"
               className="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800 sm:w-max"
@@ -41,7 +42,7 @@ const Hero = () => {
               </span>
             </a>
           </div>
-          <div className="hidden py-8 mt-16 border-y border-gray-100 dark:border-gray-800 sm:flex justify-between">
+          {/* <div className="hidden py-8 mt-16 border-y border-gray-100 dark:border-gray-800 sm:flex justify-between">
             <div className="text-left">
               <h6 className="text-lg font-semibold text-gray-700 dark:text-white">
                 The lowest price
@@ -60,7 +61,7 @@ const Hero = () => {
               </h6>
               <p className="mt-2 text-gray-500">Some text here</p>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       {/* </Container> */}

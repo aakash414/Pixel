@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   ConnectWallet,
   Web3Button,
@@ -13,12 +14,24 @@ import Hero from "../components/Hero";
 
 function Home() {
   const address = useAddress();
-  const { contract } = useContract(editionDropAddress);
-  const { data, isLoading } = useOwnedNFTs(contract, address);
-  const { mutateAsync: claim, isLoading: isClaiming } = useClaimNFT(contract);
+  // const { contract } = useContract(editionDropAddress);
+  // const { data, isLoading } = useOwnedNFTs(contract, address);
+  // const { mutateAsync: claim, isLoading: isClaiming } = useClaimNFT(contract);
   const walletInstance = useWallet();
-  console.log(walletInstance, "walletInstance");
+  const saveAddressToLocalStorage = (address) => {
+    localStorage.setItem("walletAddress", address);
+  };
 
+  // Load wallet address from local storage on component mount
+  useEffect(() => {
+    const savedAddress = localStorage.getItem("walletAddress");
+    if (savedAddress) {
+      // If there's a saved address, you can use it here as needed
+      console.log("Wallet address loaded from local storage:", savedAddress);
+    }
+  }, []);
+
+  console.log(address, "walletInstance");
   return (
     <main className="flex flex-col items-center justify-center w-full max-w-6xl px-4 mx-auto h-screen">
       {walletInstance ? (
