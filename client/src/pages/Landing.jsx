@@ -11,6 +11,7 @@ import {
 } from "@thirdweb-dev/react";
 import { editionDropAddress } from "../../const";
 import Hero from "../components/Hero";
+import Displaycards from "./Displaycards";
 
 function Home() {
   const address = useAddress();
@@ -42,7 +43,7 @@ function Home() {
               align: "center",
             }}
           />
-          <p>hi there</p>
+       <Displaycards/>
         </>
       ) : (
         <>
