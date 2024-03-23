@@ -113,7 +113,7 @@ const SellProduct = () => {
           <InputForm 
             labelName="End Date *"
             placeholder="End Date"
-            inputType="text"
+            inputType="date"
             value={form.deadline}
             handleChange={(e) => handleFormFieldChange('deadline', e)}
           />
