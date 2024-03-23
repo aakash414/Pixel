@@ -19,7 +19,7 @@ function App() {
           {/* Route for ChatPage */}
           <Route path="/pools" element={<Displaycards />} />
           <Route path="/my-order" element={<Orders />} />
-          <Route path="/profile" element={<Displaycards />} />
+          {/* <Route path="/profile" element={<Displaycards />} /> */}
           <Route path="/stripe" element={<StripePage />} />
           <Route path="/profile" element={<Profile />} />{" "}
           {/* Route for Displaycards page */}
