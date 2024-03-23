@@ -2,10 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
 html {
-    background-color: rgb(15 23 42 / var(--tw-bg-opacity));
-    height: 100%;
-}
+    background-color: rgb(15 23 42 / var(--tw-bg-opacity)); /* Dark blue with custom opacity */
+    height: 100%; /* Set full viewport height */
+  }
 
 #onramp-message {
     color: rgb(105, 115, 134);

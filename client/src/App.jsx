@@ -21,6 +21,7 @@ function App() {
           <Route path="/profile" element={<Displaycards />} />
           <Route path="/stripe" element={<StripePage/>} />
           {/* Route for Displaycards page */}
+          {/* <Route path="/sellproducts" element={<SellPoduct />} /> */}
         </Routes>
       </div>
     </Router>
