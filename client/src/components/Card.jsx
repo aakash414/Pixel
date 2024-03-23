@@ -3,7 +3,7 @@ import tagType from '../assets/type.svg';
 import plus from '../assets/plus.svg';
 import minus from '../assets/minus.svg';
 
-const Card = ({ image, category, amount }) => {
+const Card = ({ image, category, amount,myorder,share }) => {
   const [count, setCount] = useState(0);
 
   const handleIncrement = () => {
@@ -26,7 +26,7 @@ const Card = ({ image, category, amount }) => {
             <img src={tagType} alt="tag" className="w-[17px] h-[17px] object-contain"/>
             <p className="ml-[12px] mt-[2px] font-epilogue font-medium text-[12px] text-[#808191]">{category}</p>
           </div>
-          <div className="flex items-center">
+          { !myorder && <div className="flex items-center">
             <button onClick={handleDecrement} className="w-[17px] h-[17px] filter invert mr-3">
               <img src={minus} alt="minus" />
             </button>
@@ -34,7 +34,7 @@ const Card = ({ image, category, amount }) => {
             <button onClick={handleIncrement} className="w-[17px] h-[17px] filter invert ml-3">
               <img src={plus} alt="plus" />
             </button>
-          </div>
+          </div>}
         </div>
         
         <div className="flex justify-between items-center mb-2">
@@ -42,9 +42,11 @@ const Card = ({ image, category, amount }) => {
             <h3 className="font-epilogue font-semibold text-[16px] text-white text-left leading-[26px] truncate">{category}</h3>
             <p className="mt-[5px] font-epilogue  font-[12px] text-[#808191] text-left leading-[18px] truncate">{amount}</p>
           </div>
-          <button className="bg-primary hover:bg-primary text-white font-bold py-2 px-3 rounded-xl">
+         { !myorder && 
+         <button className="bg-primary hover:bg-primary text-white font-bold py-2 px-3 rounded-xl">
             Submit
-          </button>
+          </button>}
+          { myorder && <p className='text-white'>Share : {share}</p>}
         </div>
       </div>
     </div>

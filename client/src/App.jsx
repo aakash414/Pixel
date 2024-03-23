@@ -3,6 +3,7 @@ import ChatPage from "./pages/ChatPage";
 import Landing from "./pages/Landing";
 import Displaycards from "./pages/Displaycards";
 import Header from "./components/Header";
+import Orders from "./pages/Orders";
 
 function App() {
   return (
@@ -12,9 +13,10 @@ function App() {
         {/* Define routes for different pages */}
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/chat" element={<ChatPage />} />{" "}
+          <Route path="/chat" element={<ChatPage />} />
           {/* Route for ChatPage */}
-          <Route path="/displaycards" element={<Displaycards />} />{" "}
+          <Route path="/pools" element={<Displaycards />} />
+          <Route path="/my-order" element={<Orders />} />
           {/* Route for Displaycards page */}
         </Routes>
       </div>
