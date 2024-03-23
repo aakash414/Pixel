@@ -18,16 +18,13 @@ function Home() {
   // const { data, isLoading } = useOwnedNFTs(contract, address);
   // const { mutateAsync: claim, isLoading: isClaiming } = useClaimNFT(contract);
   const walletInstance = useWallet();
-  const saveAddressToLocalStorage = (address) => {
-    localStorage.setItem("walletAddress", address);
-  };
 
   // Load wallet address from local storage on component mount
   useEffect(() => {
     const savedAddress = localStorage.getItem("walletAddress");
-    if (savedAddress) {
+    if (!savedAddress) {
       // If there's a saved address, you can use it here as needed
-      console.log("Wallet address loaded from local storage:", savedAddress);
+      localStorage.setItem("walletAddress", "123143q4324");
     }
   }, []);
 

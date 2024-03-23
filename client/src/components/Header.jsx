@@ -10,7 +10,7 @@ const Header = () => {
       />
       <div className="relative z-20 w-full flex justify-between lg:w-max md:px-0">
         <a
-          href="#home"
+          href="/"
           aria-label="logo"
           className="flex space-x-2 items-center"
         >
@@ -58,7 +58,7 @@ const Header = () => {
           <ul className="tracking-wide font-medium lg:text-sm flex-col flex lg:flex-row gap-6 lg:gap-0">
             <li>
               <a
-                href="#features"
+                href="/chat"
                 className="block md:px-4 transition hover:text-primary"
               >
                 <span>Chat Room</span>
@@ -66,7 +66,7 @@ const Header = () => {
             </li>
             <li>
               <a
-                href="#solution"
+                href="/my-order"
                 className="block md:px-4 transition hover:text-primary"
               >
                 <span>My Orders</span>
@@ -74,7 +74,7 @@ const Header = () => {
             </li>
             <li>
               <a
-                href="#testimonials"
+                href="/pools"
                 className="block md:px-4 transition hover:text-primary"
               >
                 <span>Pools</span>
@@ -82,7 +82,7 @@ const Header = () => {
             </li>
             <li>
               <a
-                href="#blog"
+                href="/profile"
                 className="block md:px-4 transition hover:text-primary"
               >
                 <span>Profile</span>

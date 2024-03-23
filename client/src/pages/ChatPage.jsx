@@ -54,9 +54,10 @@ function ChatArea({activeUser}) {
   const handleSendMessage = async () => {
     if (inputValue.trim() !== '') {
       // Create a new message object with user ID (replace "123" with actual user ID)
+      const walletid = localStorage.getItem("address")
       const message = {
         message: inputValue,
-        user: "12344",
+        user: walletid,
         time: new Date().toLocaleTimeString(),
       };
   
