@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import tagType from '../assets/type.svg';
 import plus from '../assets/plus.svg';
 import minus from '../assets/minus.svg';
@@ -42,11 +42,10 @@ const Card = ({ image, category, amount,myorder,share }) => {
             <h3 className="font-epilogue font-semibold text-[16px] text-white text-left leading-[26px] truncate">{category}</h3>
             <p className="mt-[5px] font-epilogue  font-[12px] text-[#808191] text-left leading-[18px] truncate">{amount}</p>
           </div>
-         { !myorder && 
-         <button className="bg-primary hover:bg-primary text-white font-bold py-2 px-3 rounded-xl">
-            Submit
-          </button>}
-          { myorder && <p className='text-white'>Share : {share}</p>}
+          <button className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-3 rounded-2xl transform transition duration-300 hover:scale-105">
+  Submit
+</button>
+
         </div>
       </div>
     </div>
