@@ -16,18 +16,50 @@ Our project aims to empower small shopkeepers by enabling them to collectively p
 4. Order Management: Streamlines the ordering process and ensures secure payment transactions for efficient business operations.
 
 ## Link to product walkthrough
-[link to video](Link Here)
+- [Application walkthrough](https://www.loom.com/share/e0dd97fb50a54872bcb29fd2c334188e?sid=d105a7c0-89e3-4daf-ba3e-ec253c475cde	)
+- ![Screenshot from 2024-03-24 08-00-05](https://github.com/aakash414/Pixel/assets/55126957/bc32f0fd-3299-4930-9ab3-f7e7e9409ab1)
+- ![Screenshot from 2024-03-24 08-02-54](https://github.com/aakash414/Pixel/assets/55126957/4242d3d7-737f-47fd-a0f6-ad5915c08d44)
+
+
 
    
 ## Libraries used
-React
-ThirdWeb
+- React
+- ThirdWeb
+- Firebase
 
 ## How to configure
-npm install
+1.  Clone the Repository:
+
+    -   Clone the repository using the following command:
+
+        `git clone https://github.com/aakash414/Pixel.git`
+
+2.  Navigate to the Project Directory:
+
+    -   Move into the project directory after cloning:
+
+        `cd Pixel`
+
+3.  Navigate to the Project Client:
+
+    -   Move into the project client:
+
+        `cd client`
+
+3.  Install Dependencies:
+
+    -   Install the necessary dependencies using npm:
+
+        `npm install`
 
 ## How to Run
-npm run dev
+Start the Development Server:
+
+-   To run the project locally, start the development server with the following command:
+
+    `npm start`
+
 
 ## How to contribute ? 
 Features to implement 
