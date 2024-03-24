@@ -1,13 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import BrowserRouter, Routes, and Route
 import ChatPage from "./pages/ChatPage";
 import Landing from "./pages/Landing";
-import Displaycards from "./pages/Displaycards";
+import Displaycards from "./pages/DisplayCards.jsx";
 import Header from "./components/Header";
 import Orders from "./pages/Orders";
 import StripePage from "./pages/StripePage";
 import Profile from "./pages/Profile";
 import SellPoduct from "./pages/SellProduct";
 import ProductDetails from "./pages/ProductDetails";
+import CardGallery from "./pages/CardGallery.jsx";
 
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
           {/* Route for Displaycards page */}
           <Route path="/sellproducts" element={<SellPoduct />} />
           <Route path="/productdetails" element={<ProductDetails />} />
+          <Route path="/displaycards" element={<Displaycards />} />
+          <Route path="/cardgallery" element={<CardGallery />} />
         </Routes>
       </div>
     </Router>

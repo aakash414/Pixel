@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useStateContext } from '../../web3_client/web3_logic.jsx'
-import DisplayCards from './DisplayCards.jsx';
+import DisplayCards from './DisplayCards';
 
-const Profile = () => {
+const CardGallery = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [campaigns, setCampaigns] = useState([]);
 
-  const { address, contract, getUserCampaigns } = useStateContext();
+  const { address, contract, getCampaigns } = useStateContext();
 
   const fetchCampaigns = async () => {
     setIsLoading(true);
-    const data = await getUserCampaigns();
+    const data = await getCampaigns();
     setCampaigns(data);
     setIsLoading(false);
   }
@@ -20,7 +20,7 @@ const Profile = () => {
   }, [address, contract]);
 
   return (
-    <DisplayCards
+    <DisplayCards 
       title="All Campaigns"
       isLoading={isLoading}
       campaigns={campaigns}
@@ -28,4 +28,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default CardGallery

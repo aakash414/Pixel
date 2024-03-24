@@ -10,7 +10,7 @@ import {
   useClaimNFT,
 } from "@thirdweb-dev/react";
 import Hero from "../components/Hero";
-import Displaycards from "./Displaycards";
+import Displaycards from "./DisplayCards.jsx";
 
 function Home() {
   const address = useAddress();
