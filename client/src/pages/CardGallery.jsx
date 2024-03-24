@@ -20,11 +20,13 @@ const CardGallery = () => {
   }, [address, contract]);
 
   return (
+    <div className="h-screen">
     <DisplayCards 
-      title="All Campaigns"
+      title="All Products"
       isLoading={isLoading}
       campaigns={campaigns}
     />
+    </div>
   )
 }
 
