@@ -21,16 +21,16 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/chat" element={<ChatPage />} />
           {/* Route for ChatPage */}
-          <Route path="/pools" element={<Displaycards />} />
+          {/* <Route path="/pools" element={<Displaycards />} /> */}
           <Route path="/my-order" element={<Orders />} />
           {/* <Route path="/profile" element={<Displaycards />} /> */}
           <Route path="/stripe" element={<StripePage />} />
           <Route path="/profile" element={<Profile />} />{" "}
           {/* Route for Displaycards page */}
           <Route path="/sellproducts" element={<SellPoduct />} />
-          <Route path="/productdetails" element={<ProductDetails />} />
-          <Route path="/displaycards" element={<Displaycards />} />
-          <Route path="/cardgallery" element={<CardGallery />} />
+          <Route path="/productdetails/:id" element={<ProductDetails />} />
+          {/* <Route path="/displaycards" element={<Displaycards />} /> */}
+          <Route path="/pools" element={<CardGallery />} />
         </Routes>
       </div>
     </Router>

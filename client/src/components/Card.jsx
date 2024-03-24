@@ -3,7 +3,7 @@ import types from '../assets/type.svg';
 import thirdweb from '../assets/thirdweb.jpeg';
 
 
-const Card = ({ owner, title, description, target, deadline, amountCollected, image, handleClick }) => {
+const Card = ({ owner, title, description, target, deadline, amountCollected, image, handleClick,share }) => {
   const daysLeft = (deadline) => {
     const difference = new Date(deadline).getTime() - Date.now();
     const remainingDays = difference / (1000 * 3600 * 24);
@@ -35,7 +35,8 @@ const Card = ({ owner, title, description, target, deadline, amountCollected, im
             <h4 className="font-epilogue font-semibold text-[14px] text-[#b2b3bd] leading-[22px]">{amountCollected}</h4>
             <p className="mt-[3px] font-epilogue font-normal text-[12px] leading-[18px] text-[#808191] sm:max-w-[120px] truncate">Raised of {target}</p>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col ">
+            <p className='text-white text-xs mb-4'>Share {share}</p>
             <h4 className="font-epilogue font-semibold text-[14px] text-[#b2b3bd] leading-[22px]">{remainingDays}</h4>
             <p className="mt-[3px] font-epilogue font-normal text-[12px] leading-[18px] text-[#808191] sm:max-w-[120px] truncate">Days Left</p>
           </div>

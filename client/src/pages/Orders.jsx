@@ -53,9 +53,10 @@ function Orders() {
             key={card.id}
             image={card.image}
             amount={card.amount}
-            category={card.category}
+            title={card.category}
             myorder={true}
             share={card.share}
+            deadline={"2024-4-1"}
           />
         ))}
       </div>
