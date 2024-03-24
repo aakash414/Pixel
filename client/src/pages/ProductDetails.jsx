@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import thirdweb from '../assets/thirdweb.jpeg';
 import loader from '../assets/loader.svg';
 import { useStateContext } from '../../web3_client/web3_logic';
@@ -8,6 +8,7 @@ import { useStateContext } from '../../web3_client/web3_logic';
 const ProductDetails = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
+  const { pId } = useParams();
   const { donate, getDonations, contract, address } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -70,7 +71,7 @@ const ProductDetails = () => {
   }
 
   return (
-    <div>
+    <div className='p-6'>
       {isLoading && (
       <div>
         <img src={loader} alt="Loading..." />
@@ -80,8 +81,8 @@ const ProductDetails = () => {
       <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
         <div className="flex-1 flex-col">
         <img src={state?.image} alt="campaign" className="w-full h-[410px] object-cover rounded-xl"/>
-          <div className="relative w-full h-[5px] bg-[#3a3a43] mt-2">
-          <div className="absolute h-full bg-[#4acd8d]" style={{ width: `${calculateBarPercentage(state?.target, state?.amountCollected)}%`, maxWidth: '100%'}}>
+          <div className="relative w-full h-8 bg-[#3a3a43] mt-2 rounded-md">
+          <div className="absolute h-full bg-[#4acd8d] rounded-md rounded-r-none	" style={{ width: `${calculateBarPercentage(state?.target, state?.amountCollected)}%`, maxWidth: '100%'}}>
             </div>
           </div>
         </div>
@@ -89,7 +90,7 @@ const ProductDetails = () => {
         <div className="flex md:w-[150px] w-full flex-wrap justify-between gap-[30px]">
           <CountBox title="Days Left" value={remainingDays} />
           <CountBox title={`Raised of ${state?.target}`} value={state?.amountCollected} />
-          <CountBox title="Total Backers" value={donators.length} />
+          <CountBox title="Total Shareholders" value={donators.length} />
         </div>
       </div>
 
@@ -104,13 +105,13 @@ const ProductDetails = () => {
               </div>
               <div>
                 <h4 className="font-epilogue font-semibold text-[14px] text-white break-all">{state?.owner}</h4>
-                <p className="mt-[4px] font-epilogue font-normal text-[12px] text-[#808191]">10 Campaigns</p>
+                {/* <p className="mt-[4px] font-epilogue font-normal text-[12px] text-[#808191]">10 Campaigns</p> */}
               </div>
             </div>
           </div>
 
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Story</h4>
+            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Product Details</h4>
 
               <div className="mt-[20px]">
                 <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">{state?.description}</p>
@@ -138,9 +139,9 @@ const ProductDetails = () => {
 
           <div className="mt-[20px] flex flex-col p-4 bg-[#1c1c24] rounded-[10px]">
             <p className="font-epilogue fount-medium text-[20px] leading-[30px] text-center text-[#808191]">
-              Fund the campaign
+              Buy the Share
             </p>
-            <div className="mt-[30px]">
+            <div className="mt-[30px] flex flex-col gap-4">
               <input 
                 type="number"
                 placeholder="ETH 0.1"
@@ -150,14 +151,14 @@ const ProductDetails = () => {
                 onChange={(e) => setAmount(e.target.value)}
               />
 
-              <div className="my-[20px] p-4 bg-[#13131a] rounded-[10px]">
+              {/* <div className="my-[20px] p-4 bg-[#13131a] rounded-[10px]">
                 <h4 className="font-epilogue font-semibold text-[14px] leading-[22px] text-white">Back it because you believe in it.</h4>
                 <p className="mt-[20px] font-epilogue font-normal leading-[22px] text-[#808191]">Support the project for no reward, just because it speaks to you.</p>
-              </div>
+              </div> */}
 
               <CustomButton 
                 btnType="button"
-                title="Fund Campaign"
+                title="Buy Share"
                 styles="w-full bg-[#8c6dfd]"
                 handleClick={handleDonate}
               />

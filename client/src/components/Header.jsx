@@ -62,7 +62,7 @@ const Header = () => {
             </li>
             <li>
               <a
-                href="/my-order"
+                href="/"
                 className="block md:px-4 transition hover:text-primary"
               >
                 <span>My Orders</span>

@@ -1,5 +1,29 @@
-const Profile = () => {
+import { useState, useEffect } from "react";
+import { useStateContext } from "../../web3_client/web3_logic";
+import Card from "../components/Card.jsx";
+import loader from '../assets/loader.svg'
+import { v4 as uuidv4 } from "uuid";
+
+const Profile = ({title}) => {
   const walletAddress = localStorage.getItem("walletAddress");
+  const [isLoading, setIsLoading] = useState(false);
+  const [campaigns, setCampaigns] = useState([]);
+
+  const { contract, getUserCampaigns } = useStateContext();
+
+  const address = localStorage.getItem("walletAddress");
+  console.log(address, 'address: ')
+
+  const fetchCampaigns = async () => {
+    setIsLoading(true);
+    const data = await getUserCampaigns(address);
+    setCampaigns(data);
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    if(contract) fetchCampaigns();
+  }, [address, contract]);
 
   return (
     <div className="w-full h-auto bg-gray-900">
@@ -104,13 +128,35 @@ const Profile = () => {
                       <div className="mt-2">
                         <div className="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
                           <span className="flex select-none py-2 items-center pl-3 text-gray-400 sm:text-sm">
-                            {walletAddress}
+                            {address}
                           </span>
                         </div>
                       </div>
                     </div>
                   </div>
                 </form>
+
+      <div className="col-span-full	col-start-2">
+      {/* <h1 className="font-epilogue font-semibold text-[18px] text-white text-left">{title} ({campaigns?.length})</h1> */}
+
+      <div className="flex flex-wrap mt-[20px] gap-[26px]">
+        {isLoading && (
+          <img src={loader} alt="loader" className="w-[100px] h-[100px] object-contain" />
+        )}
+
+        {!isLoading && campaigns?.length === 0 && (
+          <p className="font-epilogue font-semibold text-[14px] leading-[30px] text-[#818183]">
+            You have not created any campaigns yet
+          </p>
+        )}
+
+        {!isLoading && campaigns?.length > 0 && campaigns.map((campaign) => <Card 
+          key={uuidv4()}
+          {...campaign}
+          handleClick={() => handleNavigate(campaign)}
+        />)}
+      </div>
+    </div>
               </div>
 
               <div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
@@ -138,6 +184,9 @@ const Profile = () => {
           </main>
         </div>
       </div>
+
+      
+
     </div>
   );
 };
